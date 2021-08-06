@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Lecture_1_5_Medlev_Pavel
+namespace MaxOfArray
 {
     class Program
     {
