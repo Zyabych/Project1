@@ -3,57 +3,52 @@ using System.Threading;
 
 namespace Lecture_1_5_Medlev_Pavel
 {
-    /// <summary>
-    ///  Консольное приложение для бегущей строки
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            // TODO Всё неизменяемое в константы.
-            const string infoText = "Количество отображаемых символов в строке = {0}. Задержка = {1} мс. /esc- выход/";
-            // TODO Магия упр. последовательностей. А можно было просто   Console.SetCursorPosition(9, 3)
-            //const string startPoint = "\n\n\n\n\t\t\t ";
-            const string textStr1 = "  Московское время  ";
-            const string textStr2 = ". Время как вода - течет и изменяется.. ";
-
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            // TODO снова константы
-            const int lengthDisplayBox = 70;
-            const int delayTime = 500;
-            int i = 0;
-            int lengthLineBreak = 0;
-
-            do
+            int[,] arrayTable = new int[3,50];
+            int[] table = new int[100];  
+            Random random = new Random();
+            int k = 0;
+            for (int i = 0; i<2; i++)
             {
-                Console.WriteLine(infoText, lengthDisplayBox, delayTime);
-                Thread.Sleep(delayTime * 8);
-                Console.Clear();
-
-                while (!Console.KeyAvailable)
+                for (int j = 0; j < 50; j++)
                 {
-                    // TODO Конкатенация через +. Почему для infoText у вас шаблон а тут +???
-                    string textBox = string.Format("{0}{1}{2}", textStr1, DateTime.Now.ToLongTimeString(), textStr2);
 
-                    Console.SetCursorPosition(12, 3);
-                    Console.Write($"{textBox.Substring(i, lengthDisplayBox - lengthLineBreak)}{textBox.Substring(0, lengthLineBreak)}");
-                    Thread.Sleep(delayTime);
-                    Console.Clear();
+                    arrayTable[i, j] = random.Next(10,100);
+                    Console.Write($"{arrayTable[i, j]} ");
+                    table[k++] = arrayTable[i, j];
 
-                    // TODO Неправильное использование итератора. Необходимо было объединять.
-                    // i++
-                    if (++i == textBox.Length)
-                    {
-                        i = 0;
-                        lengthLineBreak = 0;
-                    }
-
-                    else if (i == textBox.Length - lengthDisplayBox + lengthLineBreak)
-                        lengthLineBreak++;
                 }
 
-            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i<table.Length; i++)
+            {
+                for (int j = i+1; j<table.Length; j++)
+                {
+                    if (table[j] > table[i])
+                    {
+                        int a = table[i];
+                        table[i] = table[j];
+                        table[j] = a;
+
+                    }
+                }
+
+            }
+
+            Console.WriteLine("Result: ");
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write($"{table[i]} ");
+
+            }
+
+
         }
     }
 }
