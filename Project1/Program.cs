@@ -7,13 +7,13 @@ namespace MaxOfArray
     {
         static void Main(string[] args)
         {
-            int[,] arrayTable = new int[3,50];
-            int[] table = new int[100];  
+            int[,] arrayTable = new int[3,35];
+            int[] table = new int[106];  
             Random random = new Random();
             int k = 0;
-            for (int i = 0; i<2; i++)
+            for (int i = 0; i<3; i++)
             {
-                for (int j = 0; j < 50; j++)
+                for (int j = 0; j < 35; j++)
                 {
 
                     arrayTable[i, j] = random.Next(10,100);
